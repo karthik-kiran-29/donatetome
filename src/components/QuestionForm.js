@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-export default function DetailsForm() {
+export default function QuestionForm() {
   const {
     register,
     handleSubmit,

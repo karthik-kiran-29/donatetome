@@ -8,7 +8,7 @@ export default function ButtonDirect(){
     }
     return (
         <>
-         <button onClick={onSubmit} className="bg-green-600 m-2 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+         <button onClick={onSubmit} className="bg-green-500 m-2 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
             Create Shareables 
          </button>
         </>

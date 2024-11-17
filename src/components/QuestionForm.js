@@ -94,6 +94,21 @@ function CampaignForm() {
           )}
         </div>
 
+        {/* UPI ID */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">
+            UPI ID To Receive the Donations
+          </label>
+          <input
+            {...register('UpiID', { required: 'Hospital name is required' })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"
+            placeholder="Enter UPI's ID - example@bank.com"
+          />
+          {errors.UpiID && (
+            <p className="text-red-500 text-sm mt-1">{errors.hospitalName.message}</p>
+          )}
+        </div>
+
         {/* Disease Information */}
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">

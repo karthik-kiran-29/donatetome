@@ -1,7 +1,8 @@
 function Share({ campaignData }) {
     function generateShareMessage() {
       return encodeURIComponent(
-        `${campaignData.patientPhoto[0]}
+        `Donations here: ${"upi://pay?pa=" + campaignData.UpiID + "&tn=donate-to-me-app-donation"} \n
+        
         Support ${campaignData.beneficiaryName}'s Medical Treatment\n\n` +
         `${campaignData.beneficiaryName} is currently admitted at ${campaignData.hospitalName} ` +
         `and is battling ${campaignData.disease}.\n\n` +
@@ -14,6 +15,7 @@ function Share({ campaignData }) {
       whatsapp: `https://wa.me/?text=${generateShareMessage()}`,
       twitter: `https://twitter.com/intent/tweet?text=${generateShareMessage()}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}&summary=${generateShareMessage()}`,
+      copytext: `${generateShareMessage()}`
     };
   
     return (
@@ -57,10 +59,30 @@ function Share({ campaignData }) {
           {/* Copy Link Button */}
           <button
             onClick={() => {
-              navigator.clipboard.writeText(window.location.href);
-              alert('Link copied to clipboard!');
+              if (navigator.clipboard && window.isSecureContext) {
+                 navigator.clipboard.writeText(decodeURIComponent(shareLinks.copytext));
+            } else {
+                // Use the 'out of viewport hidden text area' trick
+                const textArea = document.createElement("textarea");
+                textArea.value = decodeURIComponent(shareLinks.copytext);
+                    
+                // Move textarea out of the viewport so it's not visible
+                textArea.style.position = "absolute";
+                textArea.style.left = "-999999px";
+                    
+                document.body.prepend(textArea);
+                textArea.select();
+        
+                try {
+                    document.execCommand('copy');
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    textArea.remove();
+                }
+            }
             }}
-            className="flex items-center px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+            className="flex items-center px-6 py-3 hover:bg-gray-500 text-white rounded-lg  transition-colors bg-green-500"
           >
             <span className="mr-2">🔗</span>
             Copy Link

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CampaignForm() {
   const {
@@ -18,10 +18,16 @@ function CampaignForm() {
     }
   };
 
+  const navigate = useNavigate();
+
+  function onSharePage(data){
+    navigate("/share", { state: {data} });
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <form 
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit((data)=> onSharePage(data))}
         className="mx-auto bg-white rounded-lg shadow-md p-6"
       >
         <h1 className="text-2xl font-bold text-green-600 mb-6 text-center">
